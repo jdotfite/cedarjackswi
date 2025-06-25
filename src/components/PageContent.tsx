@@ -1,4 +1,4 @@
-import { StoryblokComponent } from '@storyblok/react';
+import { StoryblokComponent, storyblokEditable } from '@storyblok/react';
 import React from 'react';
 
 interface PageContentProps {
@@ -7,7 +7,7 @@ interface PageContentProps {
 
 export default function PageContent({ blok }: PageContentProps) {
   return (
-    <main>
+    <main {...storyblokEditable(blok)}>
       {blok.body?.map((nestedBlok: any) => (
         <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
       ))}

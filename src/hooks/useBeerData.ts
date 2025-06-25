@@ -18,9 +18,8 @@ export const useBeerData = () => {
   const [beerData, setBeerData] = useState<BeerData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
   const STORYBLOK_TOKEN =
-    process.env.NEXT_PUBLIC_STORYBLOK_TOKEN || 'xhkvUUr5K0a6RMP5lvuCwQtt';
+    process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN || 'xhkvUUr5K0a6RMP5lvuCwQtt';
 
   useEffect(() => {
     const fetchBeerData = async () => {

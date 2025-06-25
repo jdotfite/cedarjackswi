@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { LinkButton } from './Button';
+import { storyblokEditable, SbBlokData } from '@storyblok/react';
 
-interface StoryblokEvent {
+interface StoryblokEvent extends SbBlokData {
   _uid: string;
   date: string;
   name: string;
@@ -15,7 +16,7 @@ interface StoryblokEvent {
 }
 
 interface EventsSectionProps {
-  blok?: {
+  blok?: SbBlokData & {
     title?: string;
     main_title?: string;
     Events?: StoryblokEvent[];
@@ -50,7 +51,10 @@ const EventsSection: React.FC<EventsSectionProps> = ({
   if (eventsList.length === 0) {
     return null;
   }  return (
-    <section className="bg-black text-white py-16 px-4 font-oswald">
+    <section 
+      {...(blok ? storyblokEditable(blok) : {})}
+      className="bg-black text-white py-16 px-4 font-oswald"
+    >
       <div className="max-w-6xl mx-auto px-8">
         {/* Section Title  */}
         <div className="text-center mb-12">
@@ -68,10 +72,12 @@ const EventsSection: React.FC<EventsSectionProps> = ({
             const { day, month, weekday } = formatEventDate(event.date);            return (
               <div
                 key={event._uid}
+                {...storyblokEditable(event)}
                 className={`
                   ${index !== eventsList.length - 1 ? 'border-b border-gray-800' : ''}
                   group
-                `}              >                <a
+                `}
+              ><a
                   href={event.cta?.url}
                   className="flex items-center justify-between py-6 px-0 transition-colors duration-200 block"
                 >
