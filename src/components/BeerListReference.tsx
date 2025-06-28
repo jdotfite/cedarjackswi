@@ -51,55 +51,86 @@ const BeerListReference: React.FC<BeerListReferenceProps> = ({ blok }) => {
   const [beerData, setBeerData] = useState<BeerStoryContent | null>(null);
   const [loading, setLoading] = useState(true);
   
-  // Get the first UUID from the beer_list_story array
-  const beerStoryUUID = blok.beer_list_story?.[0];
+  // Get the first reference from the beer_list_story array
+  const beerStoryRef = blok.beer_list_story?.[0];
   
   useEffect(() => {
     const fetchBeerData = async () => {
       try {
-        // Debug logging
-        console.log('BeerListReference Debug:');
-        console.log('- blok.beer_list_story:', blok.beer_list_story);
-        console.log('- beerStoryUUID:', beerStoryUUID);
-        console.log('- resolvedStories:', resolvedStories);
-        console.log('- resolvedStories length:', resolvedStories.length);
-        
-        if (!beerStoryUUID) {
-          console.log('No beer story UUID found');
+        if (!beerStoryRef) {
+          console.log('No beer story reference found');
           setLoading(false);
           return;
         }
+
+        // Check if beerStoryRef is a UUID or an object with uuid
+        let targetUUID = typeof beerStoryRef === 'string' ? beerStoryRef : beerStoryRef?.uuid;
         
-        // First try to find in resolved stories
-        let referencedStory = resolvedStories.find(story => story.uuid === beerStoryUUID);        if (!referencedStory) {
-          console.log('Story not found in resolved stories, fetching beer-menu directly...');
-          // Fallback: fetch the beer-menu story directly
+        console.log('BeerListReference Debug:');
+        console.log('- beerStoryRef:', beerStoryRef);
+        console.log('- targetUUID:', targetUUID);
+        console.log('- resolvedStories available:', resolvedStories.length);
+        
+        // First try to find in resolved stories by UUID
+        let referencedStory = resolvedStories.find(story => 
+          story.uuid === targetUUID || story.id === targetUUID
+        );
+        
+        // If not found by UUID, try by slug (beer-menu is a common slug)
+        if (!referencedStory) {
+          referencedStory = resolvedStories.find(story => 
+            story.slug === 'beer-menu' || story.name === 'beer-menu'
+          );
+        }
+        
+        if (!referencedStory) {
+          console.log('Story not found in resolved stories, fetching directly...');
+          // Fallback: fetch the story directly
           const storyblokApi = getStoryblokApi();
-          const { data } = await storyblokApi.get(`cdn/stories/beer-menu`, {
-            version: 'draft'
-          });
-          console.log('Fetched beer-menu story:', data.story);
-          referencedStory = data.story;
+          
+          try {
+            // Try fetching by slug first
+            const { data } = await storyblokApi.get(`cdn/stories/beer-menu`, {
+              version: 'draft'
+            });
+            referencedStory = data.story;
+            console.log('✅ Fetched beer-menu story directly:', referencedStory);
+          } catch (slugError) {
+            console.log('❌ Could not fetch by slug, trying by UUID...');
+            if (targetUUID) {
+              const { data } = await storyblokApi.get(`cdn/stories/${targetUUID}`, {
+                version: 'draft'
+              });
+              referencedStory = data.story;
+              console.log('✅ Fetched story by UUID:', referencedStory);
+            }
+          }
         }
         
         if (referencedStory?.content) {
+          console.log('✅ Setting beer data from story:', referencedStory.content.title);
           setBeerData(referencedStory.content);
+        } else {
+          console.log('❌ No valid story content found');
         }
       } catch (error) {
-        console.error('Error fetching beer data:', error);
+        console.error('❌ Error fetching beer data:', error);
       } finally {
         setLoading(false);
       }
     };
     
     fetchBeerData();
-  }, [beerStoryUUID, resolvedStories]);
+  }, [beerStoryRef, resolvedStories]);
   
   if (loading) {
     return (
       <section className="bg-black text-white py-16">
         <div className="max-w-6xl mx-auto px-8 text-center">
-          <p className="text-gray-400">Loading beer menu...</p>
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-700 rounded w-64 mx-auto mb-4"></div>
+            <div className="h-4 bg-gray-700 rounded w-32 mx-auto"></div>
+          </div>
         </div>
       </section>
     );
@@ -111,12 +142,14 @@ const BeerListReference: React.FC<BeerListReferenceProps> = ({ blok }) => {
         {...storyblokEditable(blok)} 
         className="bg-black text-white py-16"
       >
-        <div className="max-w-6xl mx-auto px-8 text-center">          <p className="text-gray-400">Beer menu not found or not configured</p>
+        <div className="max-w-6xl mx-auto px-8 text-center">
+          <p className="text-gray-400">Beer menu not available</p>
           <p className="text-sm text-gray-500 mt-2">
-            Reference: {beerStoryUUID || 'No reference set'}
+            Check that the beer menu story is published and accessible
           </p>
         </div>
-      </section>    );
+      </section>
+    );
   }
 
   return (

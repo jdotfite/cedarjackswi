@@ -7,34 +7,11 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="text-xl font-bold text-white font-heading">
-              Cedar Jacks WI
+              HEADING
             </Link>
           </div>
           <nav className="hidden md:flex space-x-8">
-            <Link 
-              href="/" 
-              className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium font-body"
-            >
-              Home
-            </Link>
-            <Link 
-              href="/about" 
-              className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium font-body"
-            >
-              About
-            </Link>
-            <Link 
-              href="/services" 
-              className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium font-body"
-            >
-              Services
-            </Link>
-            <Link 
-              href="/contact" 
-              className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium font-body"
-            >
-              Contact
-            </Link>
+           
           </nav>
           <div className="md:hidden">
             <button className="text-gray-300 hover:text-white">

@@ -54,7 +54,13 @@ export default function FollowUs({ blok }: { blok: FollowUsBlok }) {
         
         {blok.tagline && (
           <p className="text-sm text-gray-400 mt-4">
-            {blok.tagline}
+            {blok.tagline.includes('•') ? (
+              <span dangerouslySetInnerHTML={{
+                __html: blok.tagline.replace(/•/g, '<span class="text-white">•</span>')
+              }} />
+            ) : (
+              blok.tagline
+            )}
           </p>
         )}
         

@@ -13,7 +13,7 @@ export default function Footer({ blok }: { blok: FooterBlok }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 justify-items-center">
           {blok.footer_sections?.map((section) => (
-            <div key={section._uid} className="max-w-xs w-full md:max-w-none md:w-auto text-left">
+            <div key={section._uid} className="max-w-xs w-full md:max-w-none md:w-auto text-left flex flex-col justify-end">
               <StoryblokComponent blok={section} />
             </div>
           ))}

@@ -5,7 +5,9 @@ import { getStoryblokApi } from '@/lib/storyblok';
 import { StoryblokComponent, storyblokEditable, useStoryblokState, ISbStoryData } from '@storyblok/react';
 import { ResolvedStoriesProvider } from '@/contexts/ResolvedStoriesContext';
 
-export default function Home() {  const [story, setStory] = useState<ISbStoryData | null>(null);
+export default function Home() {
+  const [story, setStory] = useState<ISbStoryData | null>(null);
+  const [footerStory, setFooterStory] = useState<ISbStoryData | null>(null);
   const [resolvedStories, setResolvedStories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -16,15 +18,34 @@ export default function Home() {  const [story, setStory] = useState<ISbStoryDat
   useEffect(() => {
     const fetchStory = async () => {
       try {
-        const storyblokApi = getStoryblokApi();          // Always fetch the 'home' story for the root page
-        const { data } = await storyblokApi.get('cdn/stories/home', {
-          version: 'draft',
-          resolve_relations: ['beer_list_reference.beer_list_story']        });
+        const storyblokApi = getStoryblokApi();
         
-        console.log('API Response:', { story: data.story.name, rels: data.rels });
+        // Fetch both home and footer stories in parallel
+        const [homeResponse, footerResponse] = await Promise.all([
+          storyblokApi.get('cdn/stories/home', {
+            version: 'draft',
+            resolve_relations: [
+              'beer_list_reference.beer_list_story',
+              'beer_list.beers',
+              'hero_carousel.slides',
+              'events_section.events'
+            ]
+          }),
+          storyblokApi.get('cdn/stories/footer', {
+            version: 'draft'
+          })
+        ]);
         
-        setStory(data.story);
-        setResolvedStories(data.rels || []);
+        console.log('API Response:', { 
+          story: homeResponse.data.story.name, 
+          footer: footerResponse.data.story.name,
+          footerComponent: footerResponse.data.story.content.component, // Add component name debugging
+          rels: homeResponse.data.rels 
+        });
+        
+        setStory(homeResponse.data.story);
+        setFooterStory(footerResponse.data.story);
+        setResolvedStories(homeResponse.data.rels || []);
       } catch (err) {
         console.error('Error fetching story:', err);
         setError(err instanceof Error ? err.message : 'Unknown error occurred');
@@ -72,6 +93,7 @@ export default function Home() {  const [story, setStory] = useState<ISbStoryDat
     <ResolvedStoriesProvider resolvedStories={resolvedStories}>
       <div className="bg-white" {...storyblokEditable(storyFromBridge.content)}>
         <StoryblokComponent blok={storyFromBridge.content} />
+        {footerStory && <StoryblokComponent blok={footerStory.content} />}
       </div>
     </ResolvedStoriesProvider>
   );

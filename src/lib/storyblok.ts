@@ -27,6 +27,7 @@ export const getStoryblokApi = () => {
         beer_menu_loader: BeerMenuLoader,
         beer_list_reference: BeerListReference,
         footer: Footer,
+        Footer: Footer, // Handle capitalized version
         latest_posts: LatestPosts,
         contact_us: ContactUs,
         follow_us: FollowUs,
