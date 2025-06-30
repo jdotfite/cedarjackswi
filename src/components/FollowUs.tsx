@@ -30,10 +30,9 @@ export default function FollowUs({ blok }: { blok: FollowUsBlok }) {
       </>
     );
   };
-  
-  return (
+    return (
     <div {...storyblokEditable(blok)} className="font-oswald">
-      <h4 className="text-lg font-medium uppercase mb-4">{formatTitleWithOrangePeriod(blok.title)}</h4>
+      <h4 className="text-xl font-medium uppercase mb-4">{formatTitleWithOrangePeriod(blok.title)}</h4>
       <div className="space-y-3">
         {blok.follow_description && <p>{blok.follow_description}</p>}
         

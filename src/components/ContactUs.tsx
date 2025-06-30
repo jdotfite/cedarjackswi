@@ -28,10 +28,9 @@ export default function ContactUs({ blok }: { blok: ContactUsBlok }) {
       </>
     );
   };
-  
-  return (
+    return (
     <div {...storyblokEditable(blok)} className="font-oswald">
-      <h4 className="text-lg font-medium uppercase mb-4">{formatTitleWithOrangePeriod(blok.title)}</h4>
+      <h4 className="text-xl font-medium uppercase mb-4">{formatTitleWithOrangePeriod(blok.title)}</h4>
       <div className="space-y-2">
         {blok.email && (
           <p>

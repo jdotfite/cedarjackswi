@@ -7,6 +7,7 @@ import ContactUs from './ContactUs';
 import FollowUs from './FollowUs';
 import OpenHours from './OpenHours';
 import EventsSection from './EventsSection';
+import ReservationForm from './ReservationForm';
 
 export default {
   page: ({ blok, children }: any) => children, // Page wrapper
@@ -17,8 +18,8 @@ export default {
   latest_posts: LatestPosts,
   contact_us: ContactUs,
   follow_us: FollowUs,
-  open_hours: OpenHours,
-  global_hours: OpenHours, // Keep for backward compatibility
+  open_hours: OpenHours,  global_hours: OpenHours, // Keep for backward compatibility
   events_section: EventsSection,
+  reservation_form: ReservationForm,
   post_item: ({ blok }: any) => null, // handled within latest_posts
 };

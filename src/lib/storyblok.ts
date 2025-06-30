@@ -10,6 +10,8 @@ import LatestPosts from '@/components/LatestPosts';
 import ContactUs from '@/components/ContactUs';
 import FollowUs from '@/components/FollowUs';
 import OpenHours from '@/components/OpenHours';
+import ReservationForm from '@/components/ReservationForm';
+import HeroSection from '@/components/HeroSection';
 
 let isInitialized = false;
 let storyblokApi: any = null;
@@ -30,10 +32,10 @@ export const getStoryblokApi = () => {
         Footer: Footer, // Handle capitalized version
         latest_posts: LatestPosts,
         contact_us: ContactUs,
-        follow_us: FollowUs,
-        open_hours: OpenHours,
-        global_hours: OpenHours,
-        events_section: EventsSection,
+        follow_us: FollowUs,        open_hours: OpenHours,
+        global_hours: OpenHours,        events_section: EventsSection,
+        reservation_form: ReservationForm,
+        hero_section: HeroSection,
         // Add nested component for hero slides
         hero_slide: ({ blok }: { blok: any }) => null,
         'hero_slide ': ({ blok }: { blok: any }) => null,

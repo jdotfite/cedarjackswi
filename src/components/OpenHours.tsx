@@ -70,9 +70,8 @@ export default function OpenHours({ blok, title = "", className = "" }: OpenHour
       closed: entry.is_closed
     }));
 
-    return (
-      <div {...storyblokEditable(blok)} className={`font-oswald ${className}`}>
-        <h4 className="text-lg font-medium uppercase mb-4">{formatTitle(blok.title || title)}</h4>
+    return (      <div {...storyblokEditable(blok)} className={`font-oswald ${className}`}>
+        <h4 className="text-xl font-medium uppercase mb-4">{formatTitle(blok.title || title)}</h4>
         <ul className="list-none space-y-2">
           {hours.map(({ day, time, closed }: HourItem) => (
             <li key={day} className="flex items-center">
@@ -100,9 +99,8 @@ export default function OpenHours({ blok, title = "", className = "" }: OpenHour
       { day: 'Sunday', time: 'Closed', closed: true }
     ];
 
-    return (
-      <div {...storyblokEditable(blok)} className={`font-oswald ${className}`}>
-        <h4 className="text-lg font-medium uppercase mb-4">{formatTitle(blok.title || title)}</h4>
+    return (      <div {...storyblokEditable(blok)} className={`font-oswald ${className}`}>
+        <h4 className="text-xl font-medium uppercase mb-4">{formatTitle(blok.title || title)}</h4>
         <ul className="list-none space-y-2">
           {defaultHours.map(({ day, time, closed }: HourItem) => (
             <li key={day} className="flex items-center">
@@ -127,9 +125,8 @@ export default function OpenHours({ blok, title = "", className = "" }: OpenHour
     { day: 'Saturday', time: '4:00 PM - 12:00 AM', closed: false },
     { day: 'Sunday', time: 'Closed', closed: true }
   ];
-  return (
-    <div className={`font-oswald ${className}`}>
-      <h4 className="text-lg uppercase mb-4">{formatTitle(title)}</h4>
+  return (    <div className={`font-oswald ${className}`}>
+      <h4 className="text-xl font-medium uppercase mb-4">{formatTitle(title)}</h4>
       <ul className="list-none space-y-2">
         {defaultHours.map(({ day, time, closed }: HourItem) => (
           <li key={day} className="flex items-center">
