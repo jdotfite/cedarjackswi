@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "powershell \"$env:NODE_ENV='development'; next dev --turbopack\"",
     "dev:https": "powershell \"$env:NODE_ENV='development'; next dev --turbopack --experimental-https --port 3010\"",
-    "build": "powershell \"$env:NODE_ENV='production'; next build --no-lint\"",
+    "build": "powershell \"$env:NODE_ENV='production'; next build\"",
     "start": "powershell \"$env:NODE_ENV='production'; next start\"",
     "lint": "next lint"
   },
