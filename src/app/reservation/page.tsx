@@ -4,10 +4,24 @@ import { getStoryblokApi } from '@/lib/storyblok';
 import ReservationForm from '@/components/ReservationForm';
 
 export default async function ReservationPage() {
-  let storyblokApi = getStoryblokApi();
+  const storyblokApi = getStoryblokApi();
   
+  // During build time, if the API key is not available, render a fallback UI
   if (!storyblokApi) {
-    throw new Error('Storyblok API client not initialized');
+    console.warn('Storyblok API client not initialized. Rendering fallback UI.');
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <h1 className="text-3xl font-bold mb-6">Make a Reservation</h1>
+        <ReservationForm blok={{
+          component: 'reservation_form',
+          heading: 'Reserve Our Basement',
+          subheading: 'Fill out the form below to request a reservation',
+          pre_heading: 'Reservation',
+          description: 'Please provide your information to request a reservation.',
+          success_message: 'Thank you for your reservation request! We will contact you shortly.'
+        }} />
+      </div>
+    );
   }
   
   try {

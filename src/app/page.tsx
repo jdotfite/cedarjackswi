@@ -21,7 +21,10 @@ export default function Home() {
         const storyblokApi = getStoryblokApi();
         
         if (!storyblokApi) {
-          throw new Error('Storyblok API client not initialized');
+          console.warn('Storyblok API client not initialized');
+          setError('Content management system not available. Please check your environment configuration.');
+          setLoading(false);
+          return;
         }
         
         // Fetch both home and footer stories in parallel
