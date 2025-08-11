@@ -1,0 +1,29 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NEXT_PRIVATE_TARGET = "server"
+
+# Form notifications
+[[notifications]]
+  type = "email"
+  event = "submission"
+  form = "basement-reservation"
+  to = "your-email@example.com"  # Replace with your actual email
+
+# Handle Next.js dynamic routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"], Country = ["US"]}
+
+# Prevent crawling of form detection page
+[[headers]]
+  for = "/forms.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

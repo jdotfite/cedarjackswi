@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Static Forms for Netlify</title>
+</head>
+<body>
+  <!-- This hidden form is needed for Netlify to detect the form structure -->
+  <form name="basement-reservation" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="tel" name="phone" />
+    <input type="date" name="date" />
+    <input type="time" name="time" />
+    <input type="number" name="seats" />
+    <input type="email" name="email" />
+    <textarea name="notes"></textarea>
+  </form>
+</body>
+</html>
