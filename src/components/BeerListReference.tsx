@@ -63,8 +63,8 @@ const BeerListReference: React.FC<BeerListReferenceProps> = ({ blok }) => {
           return;
         }
 
-        // Check if beerStoryRef is a UUID or an object with uuid
-        let targetUUID = typeof beerStoryRef === 'string' ? beerStoryRef : beerStoryRef?.uuid;
+        // beerStoryRef should be a string (UUID)
+        const targetUUID = beerStoryRef;
         
         console.log('BeerListReference Debug:');
         console.log('- beerStoryRef:', beerStoryRef);
@@ -73,7 +73,7 @@ const BeerListReference: React.FC<BeerListReferenceProps> = ({ blok }) => {
         
         // First try to find in resolved stories by UUID
         let referencedStory = resolvedStories.find(story => 
-          story.uuid === targetUUID || story.id === targetUUID
+          story.uuid === targetUUID
         );
         
         // If not found by UUID, try by slug (beer-menu is a common slug)
@@ -87,6 +87,12 @@ const BeerListReference: React.FC<BeerListReferenceProps> = ({ blok }) => {
           console.log('Story not found in resolved stories, fetching directly...');
           // Fallback: fetch the story directly
           const storyblokApi = getStoryblokApi();
+          
+          if (!storyblokApi) {
+            console.error('Storyblok API client not initialized');
+            setLoading(false);
+            return;
+          }
           
           try {
             // Try fetching by slug first
@@ -109,7 +115,8 @@ const BeerListReference: React.FC<BeerListReferenceProps> = ({ blok }) => {
         
         if (referencedStory?.content) {
           console.log('✅ Setting beer data from story:', referencedStory.content.title);
-          setBeerData(referencedStory.content);
+          // Cast to the expected type, assuming the structure matches
+          setBeerData(referencedStory.content as unknown as BeerStoryContent);
         } else {
           console.log('❌ No valid story content found');
         }

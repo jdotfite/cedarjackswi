@@ -159,8 +159,12 @@ export default function ReservationForm({ blok }: { blok: ReservationFormBlok })
           method="POST"
           className="space-y-6"
         >
-          {/* Web3Forms Access Key - Replace with your actual access key */}
-          <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'YOUR_ACCESS_KEY_HERE'} />
+          {/* Web3Forms Access Key - must be provided via env */}
+          <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || ''} />
+          {/* If missing, optionally show a console error (runs client side) */}
+          {!process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY && process.env.NODE_ENV !== 'production' && (
+            <p className="text-red-400 text-sm">Missing NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY</p>
+          )}
           
           {/* Custom subject for better email organization */}
           <input type="hidden" name="subject" value="New Basement Reservation Request" />

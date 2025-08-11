@@ -41,6 +41,11 @@ const BeerMenuLoader: React.FC<{ blok: BeerMenuLoaderBlok }> = ({ blok }) => {
     const fetchBeerMenu = async () => {
       try {
         const storyblokApi = getStoryblokApi();
+        
+        if (!storyblokApi) {
+          throw new Error('Storyblok API client not initialized');
+        }
+        
         const slug = blok.menu_story_slug || 'beer-menu';
         
         const { data } = await storyblokApi.get(`cdn/stories/${slug}`, {

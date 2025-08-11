@@ -14,12 +14,18 @@ import ReservationForm from '@/components/ReservationForm';
 import HeroSection from '@/components/HeroSection';
 
 let isInitialized = false;
-let storyblokApi: any = null;
+let storyblokApi: ReturnType<typeof getApi> | null = null;
 
 export const getStoryblokApi = () => {
   if (!isInitialized) {
-    storyblokApi = storyblokInit({
-      accessToken: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN,
+    const accessToken = process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN;
+    if (!accessToken) {
+      console.error('Missing NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN. Storyblok API will not initialize.');
+      return null;
+    }
+    const region = process.env.STORYBLOK_API_REGION || 'eu';
+    storyblokInit({
+      accessToken,
       use: [apiPlugin],
       components: {
         page: Page,
@@ -32,26 +38,22 @@ export const getStoryblokApi = () => {
         Footer: Footer, // Handle capitalized version
         latest_posts: LatestPosts,
         contact_us: ContactUs,
-        follow_us: FollowUs,        open_hours: OpenHours,
-        global_hours: OpenHours,        events_section: EventsSection,
+        follow_us: FollowUs,
+        open_hours: OpenHours,
+        global_hours: OpenHours,
+        events_section: EventsSection,
         reservation_form: ReservationForm,
         hero_section: HeroSection,
-        // Add nested component for hero slides
-        hero_slide: ({ blok }: { blok: any }) => null,
-        'hero_slide ': ({ blok }: { blok: any }) => null,
-        events_item: ({ blok }: { blok: any }) => null,
-        // Add beer item component
-        beer_item: ({ blok }: { blok: any }) => null, // handled internally by BeerList
       },
       apiOptions: {
-        region: 'eu',
+        region,
       },
       bridge: process.env.NODE_ENV !== 'production', // Enable bridge in development
       enableFallbackComponent: true,
     });
-    
+    storyblokApi = getApi();
     isInitialized = true;
   }
   
-  return getApi();
+  return storyblokApi;
 };

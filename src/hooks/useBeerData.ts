@@ -18,11 +18,16 @@ export const useBeerData = () => {
   const [beerData, setBeerData] = useState<BeerData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const STORYBLOK_TOKEN =
-    process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN || 'xhkvUUr5K0a6RMP5lvuCwQtt';
+  const STORYBLOK_TOKEN = process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN;
 
   useEffect(() => {
     const fetchBeerData = async () => {
+      if (!STORYBLOK_TOKEN) {
+        setError('Storyblok access token missing');
+        setLoading(false);
+        console.error('Missing NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN');
+        return;
+      }
       try {
         const response = await fetch(
           `https://api.storyblok.com/v2/cdn/stories/beer-menu?token=${STORYBLOK_TOKEN}&version=draft`

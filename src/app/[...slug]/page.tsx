@@ -26,6 +26,10 @@ export default function StoryPage() {
       try {
         const storyblokApi = getStoryblokApi();
         
+        if (!storyblokApi) {
+          throw new Error('Storyblok API client not initialized');
+        }
+        
         // Get the slug from params, default to 'home' if not provided
         const slug = Array.isArray(params.slug) ? params.slug.join('/') : (params.slug || 'home');
         

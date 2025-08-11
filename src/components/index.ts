@@ -9,8 +9,7 @@ import OpenHours from './OpenHours';
 import EventsSection from './EventsSection';
 import ReservationForm from './ReservationForm';
 
-export default {
-  page: ({ blok, children }: any) => children, // Page wrapper
+const components = {
   hero_carousel: HeroCarousel,
   beer_section: BeerList,
   beer_list: BeerList,
@@ -18,8 +17,10 @@ export default {
   latest_posts: LatestPosts,
   contact_us: ContactUs,
   follow_us: FollowUs,
-  open_hours: OpenHours,  global_hours: OpenHours, // Keep for backward compatibility
+  open_hours: OpenHours,
+  global_hours: OpenHours,
   events_section: EventsSection,
   reservation_form: ReservationForm,
-  post_item: ({ blok }: any) => null, // handled within latest_posts
 };
+
+export default components;

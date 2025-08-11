@@ -2,6 +2,12 @@
 import { useEffect } from 'react';
 import { getStoryblokApi } from '@/lib/storyblok';
 
+// Narrow generic any usages
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function StoryblokProviderWrapper({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}
+
 export default function StoryblokProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Initialize Storyblok API

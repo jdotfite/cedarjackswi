@@ -6,6 +6,10 @@ import ReservationForm from '@/components/ReservationForm';
 export default async function ReservationPage() {
   let storyblokApi = getStoryblokApi();
   
+  if (!storyblokApi) {
+    throw new Error('Storyblok API client not initialized');
+  }
+  
   try {
     const { data } = await storyblokApi.get('cdn/stories/reservation', {
       version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',

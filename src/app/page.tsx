@@ -20,6 +20,10 @@ export default function Home() {
       try {
         const storyblokApi = getStoryblokApi();
         
+        if (!storyblokApi) {
+          throw new Error('Storyblok API client not initialized');
+        }
+        
         // Fetch both home and footer stories in parallel
         const [homeResponse, footerResponse] = await Promise.all([
           storyblokApi.get('cdn/stories/home', {
