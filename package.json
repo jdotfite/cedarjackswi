@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "powershell \"$env:NODE_ENV='development'; next dev --turbopack\"",
-    "dev:https": "powershell \"$env:NODE_ENV='development'; next dev --turbopack --experimental-https --port 3010\"",
-    "build": "powershell \"$env:NODE_ENV='production'; next build\"",
-    "start": "powershell \"$env:NODE_ENV='production'; next start\"",
+    "dev": "cross-env NODE_ENV=development next dev --turbopack",
+    "dev:https": "cross-env NODE_ENV=development next dev --turbopack --experimental-https --port 3010",
+    "build": "cross-env NODE_ENV=production next build",
+    "start": "cross-env NODE_ENV=production next start",
     "lint": "next lint"
   },
   "dependencies": {
