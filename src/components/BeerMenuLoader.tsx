@@ -66,7 +66,7 @@ const BeerMenuLoader: React.FC<{ blok: BeerMenuLoaderBlok }> = ({ blok }) => {
   if (loading) {
     return (
       <section className="bg-black text-white py-16">
-        <div className="max-w-6xl mx-auto px-8 text-center">
+        <div className="container mx-auto px-8 text-center">
           <p className="text-gray-400">Loading beer menu...</p>
         </div>
       </section>
@@ -76,7 +76,7 @@ const BeerMenuLoader: React.FC<{ blok: BeerMenuLoaderBlok }> = ({ blok }) => {
   if (!beerData) {
     return (
       <section className="bg-black text-white py-16">
-        <div className="max-w-6xl mx-auto px-8 text-center">
+        <div className="container mx-auto px-8 text-center">
           <p className="text-gray-400">Beer menu not found</p>
         </div>
       </section>
@@ -89,7 +89,7 @@ const BeerMenuLoader: React.FC<{ blok: BeerMenuLoaderBlok }> = ({ blok }) => {
       className="bg-black text-white py-16" 
       style={{ fontFamily: 'Oswald, sans-serif' }}
     >
-      <div className="max-w-6xl mx-auto px-8">
+      <div className="container mx-auto px-8">
         {/* Header - Using your original styling */}
         <div className="text-center mb-12">
           <h2>

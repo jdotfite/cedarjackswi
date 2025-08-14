@@ -32,9 +32,15 @@ interface OpenHoursProps {
 }
 
 export default function OpenHours({ blok, title = "", className = "" }: OpenHoursProps) {
-  // Helper function to append period to title
-  const formatTitle = (titleText: string) => {
-    return titleText?.endsWith('.') ? titleText : `${titleText}.`;
+  // Helper function to format title with orange period
+  const formatTitleWithOrangePeriod = (titleText: string) => {
+    const baseTitle = titleText?.endsWith('.') ? titleText.slice(0, -1) : titleText;
+    return (
+      <>
+        {baseTitle}
+        <span className="text-orange-500">.</span>
+      </>
+    );
   };
 
   // Helper function to capitalize day names
@@ -71,7 +77,7 @@ export default function OpenHours({ blok, title = "", className = "" }: OpenHour
     }));
 
     return (      <div {...storyblokEditable(blok)} className={`font-oswald ${className}`}>
-        <h4 className="text-xl font-medium uppercase mb-4">{formatTitle(blok.title || title)}</h4>
+        <h4 className="text-xl font-medium uppercase mb-4">{formatTitleWithOrangePeriod(blok.title || title)}</h4>
         <ul className="list-none space-y-2">
           {hours.map(({ day, time, closed }: HourItem) => (
             <li key={day} className="flex items-center">
@@ -100,7 +106,7 @@ export default function OpenHours({ blok, title = "", className = "" }: OpenHour
     ];
 
     return (      <div {...storyblokEditable(blok)} className={`font-oswald ${className}`}>
-        <h4 className="text-xl font-medium uppercase mb-4">{formatTitle(blok.title || title)}</h4>
+        <h4 className="text-xl font-medium uppercase mb-4">{formatTitleWithOrangePeriod(blok.title || title)}</h4>
         <ul className="list-none space-y-2">
           {defaultHours.map(({ day, time, closed }: HourItem) => (
             <li key={day} className="flex items-center">
@@ -126,7 +132,7 @@ export default function OpenHours({ blok, title = "", className = "" }: OpenHour
     { day: 'Sunday', time: 'Closed', closed: true }
   ];
   return (    <div className={`font-oswald ${className}`}>
-      <h4 className="text-xl font-medium uppercase mb-4">{formatTitle(title)}</h4>
+      <h4 className="text-xl font-medium uppercase mb-4">{formatTitleWithOrangePeriod(title)}</h4>
       <ul className="list-none space-y-2">
         {defaultHours.map(({ day, time, closed }: HourItem) => (
           <li key={day} className="flex items-center">

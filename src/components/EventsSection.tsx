@@ -55,7 +55,7 @@ const EventsSection: React.FC<EventsSectionProps> = ({
       {...(blok ? storyblokEditable(blok) : {})}
       className="bg-black text-white py-16 px-4 font-oswald"
     >
-      <div className="max-w-6xl mx-auto px-8">
+      <div className="container mx-auto px-8">
         {/* Section Title  */}
         <div className="text-center mb-12">
           <h2>
