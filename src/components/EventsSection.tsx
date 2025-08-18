@@ -53,16 +53,16 @@ const EventsSection: React.FC<EventsSectionProps> = ({
   }  return (
     <section 
       {...(blok ? storyblokEditable(blok) : {})}
-      className="bg-black text-white py-16 px-4 font-oswald"
+      className="bg-black text-white py-16 font-oswald"
     >
-      <div className="container mx-auto px-8">
+      <div className="container mx-auto px-4 md:px-8">
         {/* Section Title  */}
         <div className="text-center mb-12">
           <h2>
-            <span className="italic text-orange-400 text-[45px] block mb-2 font-quentin leading-[0.8]">
+            <span className="italic text-orange-400 text-[32px] md:text-[45px] block mb-2 font-quentin leading-[0.8]">
               {sectionTagline}
             </span>
-            <span className="uppercase font-bold text-4xl md:text-6xl tracking-wide">
+            <span className="uppercase font-bold text-3xl md:text-4xl lg:text-6xl tracking-wide">
               {sectionTitle}
             </span>
           </h2>
@@ -79,38 +79,38 @@ const EventsSection: React.FC<EventsSectionProps> = ({
                 `}
               ><a
                   href={event.cta?.url}
-                  className="flex items-center justify-between py-6 px-0 transition-colors duration-200 block"
+                  className="flex items-center justify-between py-4 md:py-6 transition-colors duration-200 block"
                 >
                   {/* Date Section */}
-                  <div className="flex items-center space-x-6">
-                    <div className="flex items-start space-x-3 min-w-[120px]">
+                  <div className="flex items-center space-x-3 md:space-x-6 flex-1">
+                    <div className="flex items-start space-x-2 md:space-x-3 min-w-[80px] md:min-w-[120px]">
                       {/* Large Date Number */}
-                      <div className="text-4xl md:text-5xl text-white group-hover:text-orange-500 transition-colors duration-200 font-oswald leading-[0.9]">
+                      <div className="text-3xl md:text-4xl lg:text-5xl text-white group-hover:text-orange-500 transition-colors duration-200 font-oswald leading-[0.9]">
                         {day}
                       </div>
                       
                       {/* Month and Weekday Stacked to the right */}
-                      <div className="flex flex-col justify-between text-sm text-gray-400 uppercase font-roboto h-12 text-center">
-                        <div className="">
+                      <div className="flex flex-col justify-between text-xs md:text-sm text-gray-400 uppercase font-roboto h-8 md:h-12 text-left">
+                        <div className="leading-tight">
                           {month}
                         </div>
-                        <div className="">
+                        <div className="leading-tight">
                           {weekday}
                         </div>
                       </div>
                     </div>
 
                     {/* Event Name */}
-                    <div className="flex-1">
-                      <h3 className="text-xl md:text-2xl uppercase tracking-wide text-white group-hover:text-orange-500 transition-colors duration-200 font-oswald font-medium">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg md:text-xl lg:text-2xl uppercase tracking-wide text-white group-hover:text-orange-500 transition-colors duration-200 font-oswald font-medium truncate">
                         {event.name || 'Unnamed Event'}
                       </h3>
                     </div>
                   </div>
 
                   {/* Link Section - VIEW EVENT button */}
-                  <div className="flex-shrink-0 ml-4">
-                    <div className="inline-block font-semibold uppercase tracking-wide transition-colors duration-200 text-center bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 text-sm rounded ">
+                  <div className="flex-shrink-0 ml-2 md:ml-4">
+                    <div className="inline-block font-semibold uppercase tracking-wide transition-colors duration-200 text-center bg-orange-500 hover:bg-orange-600 text-white px-3 md:px-6 lg:px-8 py-2 md:py-3 text-xs md:text-sm rounded whitespace-nowrap">
                       VIEW EVENT
                     </div>
                   </div>
