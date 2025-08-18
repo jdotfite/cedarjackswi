@@ -16,7 +16,7 @@ export default async function AboutPage() {
           <div className="max-w-4xl mx-auto text-lg leading-relaxed space-y-6">
             <p>
               Welcome to Cedar Jacks, where great food meets great atmosphere. Located in the heart of Wisconsin, 
-              we've been serving our community with exceptional craft cocktails, delicious food, and unforgettable experiences.
+              we&apos;ve been serving our community with exceptional craft cocktails, delicious food, and unforgettable experiences.
             </p>
             <p>
               Our story began with a simple vision: create a place where friends and family can gather to enjoy 
@@ -60,7 +60,7 @@ export default async function AboutPage() {
           <div className="max-w-4xl mx-auto text-lg leading-relaxed space-y-6">
             <p>
               Welcome to Cedar Jacks, where great food meets great atmosphere. Located in the heart of Wisconsin, 
-              we've been serving our community with exceptional craft cocktails, delicious food, and unforgettable experiences.
+              we&apos;ve been serving our community with exceptional craft cocktails, delicious food, and unforgettable experiences.
             </p>
             <p>
               Our story began with a simple vision: create a place where friends and family can gather to enjoy 
