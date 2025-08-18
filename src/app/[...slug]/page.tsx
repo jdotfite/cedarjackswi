@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import { getStoryblokApi } from '@/lib/storyblok';
 import { StoryblokComponent, storyblokEditable, useStoryblokState, ISbStoryData } from '@storyblok/react';
 import { useParams } from 'next/navigation';
+import { ResolvedStoriesProvider } from '@/contexts/ResolvedStoriesContext';
 
 export default function StoryPage() {
   const params = useParams();
   const [story, setStory] = useState<ISbStoryData | null>(null);
+  const [resolvedStories, setResolvedStories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
@@ -39,10 +41,37 @@ export default function StoryPage() {
         const { data } = await storyblokApi.get(`cdn/stories/${slug}`, {
           version: 'draft',
           resolve_links: 'url',
-          resolve_relations: ['beer_list_reference.reference']
+          resolve_relations: [
+            'beer_list_reference.beer_list_story',
+            'beer_list.beers',
+            'hero_carousel.slides',
+            'events_section.events'
+          ]
         });
         
         setStory(data.story);
+        
+        // Debug logging
+        console.log('Loaded story for about page:', {
+          storyName: data.story.name,
+          storySlug: data.story.slug,
+          contentComponent: data.story.content.component,
+          bodyLength: data.story.content.body?.length || 0,
+          bodyComponents: data.story.content.body?.map((blok: any) => blok.component) || [],
+          fullContent: data.story.content
+        });
+        
+        // Store resolved stories for context
+        if (data.rels) {
+          const resolved = Object.values(data.rels).map((rel: any) => ({
+            id: rel.id,
+            uuid: rel.uuid,
+            name: rel.name,
+            slug: rel.slug,
+            content: rel.content
+          }));
+          setResolvedStories(resolved);
+        }
       } catch (err) {
         console.error('Error fetching story:', err);
         setError(err instanceof Error ? err.message : 'Unknown error occurred');
@@ -129,8 +158,31 @@ export default function StoryPage() {
     );  }
   
   return (
-    <div className="bg-white" {...storyblokEditable(storyFromBridge.content)}>
-      <StoryblokComponent blok={storyFromBridge.content} />
-    </div>
+    <ResolvedStoriesProvider resolvedStories={resolvedStories}>
+      <div className="bg-white" {...storyblokEditable(storyFromBridge.content)}>
+        {/* Debug info */}
+        {process.env.NODE_ENV === 'development' && (
+          <div style={{ 
+            position: 'fixed', 
+            top: '10px', 
+            right: '10px', 
+            background: 'black', 
+            color: 'white', 
+            padding: '10px', 
+            fontSize: '12px',
+            zIndex: 9999,
+            maxWidth: '300px'
+          }}>
+            <div>Story: {storyFromBridge.name}</div>
+            <div>Component: {storyFromBridge.content.component}</div>
+            <div>Body Items: {storyFromBridge.content.body?.length || 0}</div>
+            {storyFromBridge.content.body?.map((blok: any, index: number) => (
+              <div key={index}>- {blok.component}</div>
+            ))}
+          </div>
+        )}
+        <StoryblokComponent blok={storyFromBridge.content} />
+      </div>
+    </ResolvedStoriesProvider>
   );
 }

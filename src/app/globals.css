@@ -26,7 +26,16 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+}
+
+/* Fixed header utilities */
+.header-height {
+  height: 4rem; /* 64px */
+}
+
+.header-offset {
+  padding-top: 4rem; /* 64px */
 }
 
 .font-oswald {

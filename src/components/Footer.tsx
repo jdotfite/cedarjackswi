@@ -28,8 +28,8 @@ export default function Footer({ blok }: { blok: FooterBlok }) {
             }
 
             return (
-              <div key={section._uid} className={`w-full ${flexClass}`}>
-                <div className="text-left">
+              <div key={section._uid} className={`w-full ${flexClass} min-h-[200px] md:min-h-[250px]`}>
+                <div className="text-left h-full">
                   <StoryblokComponent blok={section} />
                 </div>
               </div>

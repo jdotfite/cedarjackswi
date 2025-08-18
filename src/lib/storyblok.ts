@@ -12,6 +12,13 @@ import FollowUs from '@/components/FollowUs';
 import OpenHours from '@/components/OpenHours';
 import ReservationForm from '@/components/ReservationForm';
 import HeroSection from '@/components/HeroSection';
+import PhotoGallery from '@/components/PhotoGallery';
+import SpaceInfo from '@/components/SpaceInfo';
+import ReservationHero from '@/components/ReservationHero';
+import AboutHero from '@/components/AboutHero';
+import StorySection from '@/components/StorySection';
+import TeamSection from '@/components/TeamSection';
+import AboutPhotoGallery from '@/components/AboutPhotoGallery';
 
 let isInitialized = false;
 let storyblokApi: ReturnType<typeof getApi> | null = null;
@@ -43,7 +50,14 @@ export const getStoryblokApi = () => {
         global_hours: OpenHours,
         events_section: EventsSection,
         reservation_form: ReservationForm,
+        reservation_hero: ReservationHero,
         hero_section: HeroSection,
+        photo_gallery: PhotoGallery,
+        space_info: SpaceInfo,
+        about_hero: AboutHero,
+        story_section: StorySection,
+        team_section: TeamSection,
+        about_photo_gallery: AboutPhotoGallery,
       },
       apiOptions: {
         region,

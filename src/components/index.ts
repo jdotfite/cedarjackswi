@@ -8,6 +8,13 @@ import FollowUs from './FollowUs';
 import OpenHours from './OpenHours';
 import EventsSection from './EventsSection';
 import ReservationForm from './ReservationForm';
+import PhotoGallery from './PhotoGallery';
+import SpaceInfo from './SpaceInfo';
+import ReservationHero from './ReservationHero';
+import AboutHero from './AboutHero';
+import StorySection from './StorySection';
+import TeamSection from './TeamSection';
+import AboutPhotoGallery from './AboutPhotoGallery';
 
 const components = {
   hero_carousel: HeroCarousel,
@@ -21,6 +28,13 @@ const components = {
   global_hours: OpenHours,
   events_section: EventsSection,
   reservation_form: ReservationForm,
+  photo_gallery: PhotoGallery,
+  space_info: SpaceInfo,
+  reservation_hero: ReservationHero,
+  about_hero: AboutHero,
+  story_section: StorySection,
+  team_section: TeamSection,
+  about_photo_gallery: AboutPhotoGallery,
 };
 
 export default components;

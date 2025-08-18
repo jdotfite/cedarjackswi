@@ -31,40 +31,46 @@ export default function FollowUs({ blok }: { blok: FollowUsBlok }) {
     );
   };
     return (
-    <div {...storyblokEditable(blok)} className="font-oswald">
-      <h4 className="text-xl font-medium uppercase mb-4">{formatTitleWithOrangePeriod(blok.title)}</h4>
-      <div className="space-y-3">
-        {blok.follow_description && <p>{blok.follow_description}</p>}
-        
-        <div className="space-y-2">
-          {blok.social_links?.map((socialLink) => (
-            <p key={socialLink._uid}>
-              <Link 
-                href={socialLink.url.cached_url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-white hover:text-orange-500 transition-colors"
-              >
-                {socialLink.platform}
-              </Link>
-            </p>
-          ))}
+    <div {...storyblokEditable(blok)} className="font-oswald h-full">
+      <div className="flex flex-col h-full">
+        <div className="flex-grow">
+          <h4 className="text-xl font-medium uppercase mb-4">{formatTitleWithOrangePeriod(blok.title)}</h4>
+          <div className="space-y-3">
+            {blok.follow_description && <p>{blok.follow_description}</p>}
+            
+            <div className="space-y-2">
+              {blok.social_links?.map((socialLink) => (
+                <p key={socialLink._uid}>
+                  <Link 
+                    href={socialLink.url.cached_url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-white hover:text-orange-500 transition-colors"
+                  >
+                    {socialLink.platform}
+                  </Link>
+                </p>
+              ))}
+            </div>
+            
+            {(!blok.social_links || blok.social_links.length === 0) && !blok.follow_description && !blok.tagline && (
+              <p className="text-sm text-gray-400">Social media links not yet configured</p>
+            )}
+          </div>
         </div>
         
         {blok.tagline && (
-          <p className="text-sm text-gray-400 mt-4">
-            {blok.tagline.includes('•') ? (
-              <span dangerouslySetInnerHTML={{
-                __html: blok.tagline.replace(/•/g, '<span class="text-white">•</span>')
-              }} />
-            ) : (
-              blok.tagline
-            )}
-          </p>
-        )}
-        
-        {(!blok.social_links || blok.social_links.length === 0) && !blok.follow_description && !blok.tagline && (
-          <p className="text-sm text-gray-400">Social media links not yet configured</p>
+          <div className="mt-4 md:mt-auto">
+            <p className="text-sm text-gray-400">
+              {blok.tagline.includes('•') ? (
+                <span dangerouslySetInnerHTML={{
+                  __html: blok.tagline.replace(/•/g, '<span class="text-white">•</span>')
+                }} />
+              ) : (
+                blok.tagline
+              )}
+            </p>
+          </div>
         )}
       </div>
     </div>
