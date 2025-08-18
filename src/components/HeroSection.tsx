@@ -38,6 +38,7 @@ export default function HeroSection({ blok }: { blok: HeroSectionBlok }) {
       {...storyblokEditable(blok)} 
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{
+        minHeight: '100dvh',
         backgroundImage: blok.background_image?.filename 
           ? `url(${blok.background_image.filename})` 
           : 'linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url("https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80")'

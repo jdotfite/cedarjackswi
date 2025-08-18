@@ -44,7 +44,7 @@ const HeroCarousel: React.FC<{ blok: HeroCarouselBlok }> = ({ blok }) => {
   // If no slides are configured in Storyblok, show empty state
   if (!blok.slides || blok.slides.length === 0) {
     return (
-      <div {...storyblokEditable(blok)} className="relative h-screen w-full overflow-hidden bg-gray-900 flex items-center justify-center">
+      <div {...storyblokEditable(blok)} className="relative h-screen w-full overflow-hidden bg-gray-900 flex items-center justify-center" style={{ height: '100dvh' }}>
         <div className="text-center text-white">
           <h2 className="text-2xl font-bold mb-4">No slides configured</h2>
           <p className="text-gray-300">Add slides in Storyblok to display the hero carousel</p>
@@ -55,7 +55,7 @@ const HeroCarousel: React.FC<{ blok: HeroCarouselBlok }> = ({ blok }) => {
 
   const currentSlide = blok.slides[activeIndex];
   return (
-    <div {...storyblokEditable(blok)} className="relative h-screen w-full overflow-hidden bg-black">      {/* CSS Styles */}      <style jsx>{`
+    <div {...storyblokEditable(blok)} className="relative h-screen w-full overflow-hidden bg-black" style={{ height: '100dvh' }}>      {/* CSS Styles */}      <style jsx>{`
         .hero-carousel .swiper-button-prev,
         .hero-carousel .swiper-button-next {
           display: none;

@@ -61,11 +61,11 @@ export default function SpaceInfo({ blok, className = "" }: SpaceInfoProps) {
     <div {...(blok ? storyblokEditable(blok) : {})} className={`bg-black text-white font-oswald ${className}`}>
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold uppercase mb-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold uppercase mb-6 text-left">
             {formatTitleWithOrangePeriod(content.title || "Our Private Speakeasy")}
           </h2>
           
-          <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-12 text-center max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-12 text-left max-w-3xl">
             {content.description}
           </p>
 
@@ -105,7 +105,7 @@ export default function SpaceInfo({ blok, className = "" }: SpaceInfoProps) {
 
           {/* Amenities */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold uppercase mb-6 text-orange-500 text-center">
+            <h3 className="text-2xl font-semibold uppercase mb-6 text-orange-500 text-left">
               Available Services
             </h3>
             <div className="grid md:grid-cols-2 gap-4">

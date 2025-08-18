@@ -145,9 +145,9 @@ export default function PhotoGallery({ blok, title = "Gallery", className = "" }
                     priority={photo._uid === photos[0]._uid}
                   />
                   
-                  {/* Speakeasy vibe overlay - dark and moody without orange */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70 z-10"></div>
-                  <div className="absolute inset-0 bg-black/20 z-10"></div>
+                  {/* Speakeasy vibe overlay - lighter for mobile visibility */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/50 z-10"></div>
+                  <div className="absolute inset-0 bg-black/15 z-10"></div>
                   
                   {photo.caption && (
                     <div className="absolute bottom-16 left-0 right-0 bg-black/70 text-white p-3 z-20">
@@ -227,9 +227,9 @@ export default function PhotoGallery({ blok, title = "Gallery", className = "" }
                     className="object-cover w-full h-full"
                   />
                   
-                  {/* Speakeasy vibe overlay for thumbnails - dark and moody without orange */}
-                  <div className="absolute inset-0 bg-black/40 z-10"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-black/10 to-black/40 z-10"></div>
+                  {/* Speakeasy vibe overlay for thumbnails - lighter for mobile visibility */}
+                  <div className="absolute inset-0 bg-black/25 z-10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-black/5 to-black/25 z-10"></div>
                 </div>
               </SwiperSlide>
             ))}
